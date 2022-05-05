@@ -21,8 +21,8 @@ message CreateBusinessRequest {
 }
 
 message CreateBusinessResponse {
-  repeated Business business = 1;
-  repeated Error error = 2;
+  Business business = 1;
+  Error error = 2;
   uint32 status = 3;
 }
 
