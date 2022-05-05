@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package identity.v1;
+
+option go_package = "github.com/petar-arandjic/virtual_kelner.proto/identity/v1&pbidentity";
+
+message Error {
+  string key = 1;
+  string message = 2;
+}
+
+message Business {
+  string id = 1;
+  string name = 2;
+  string updated_at = 3;
+  string created_at = 4;
+}
+
+message CreateBusinessRequest {
+  string name = 1;
+}
+
+message CreateBusinessResponse {
+  repeated Business business = 1;
+  repeated Error error = 2;
+  uint32 status = 3;
+}
+
+service BusinessService {
+  rpc CreateBusiness (CreateBusinessRequest) returns (CreateBusinessResponse) {}
+}
