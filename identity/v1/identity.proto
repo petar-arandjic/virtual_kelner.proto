@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package identity.v1;
 
-option go_package = "github.com/petar-arandjic/virtual_kelner.proto/identity/v1&pbidentity";
+option go_package = "github.com/petar-arandjic/virtual_kelner.proto/identity/v1";
 
 message Error {
   string key = 1;
