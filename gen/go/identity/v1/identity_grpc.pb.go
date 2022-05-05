@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: identity/v1/identity.proto
 
-package v1_pbidentity
+package v1
 
 import (
 	context "context"
