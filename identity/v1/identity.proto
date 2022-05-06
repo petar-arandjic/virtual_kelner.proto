@@ -16,8 +16,19 @@ message Business {
   string created_at = 4;
 }
 
-message CreateBusinessRequest {
+message Auth {
+  string id = 1;
+  repeated string roles = 2;
+}
+
+message CreateBusiness {
   string name = 1;
+  string email = 2;
+}
+
+message CreateBusinessRequest {
+  Auth auth = 1;
+  CreateBusiness business = 2;
 }
 
 message CreateBusinessResponse {
