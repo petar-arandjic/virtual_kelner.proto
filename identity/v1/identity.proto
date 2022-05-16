@@ -24,6 +24,7 @@ message Auth {
 message CreateBusiness {
   string name = 1;
   string email = 2;
+  string password = 3;
 }
 
 message CreateBusinessRequest {
