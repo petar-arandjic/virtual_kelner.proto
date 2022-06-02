@@ -12,8 +12,9 @@ message Error {
 message Business {
   string id = 1;
   string name = 2;
-  string updated_at = 3;
-  string created_at = 4;
+  string email = 3;
+  string updated_at = 10;
+  string created_at = 11;
 }
 
 message Auth {
@@ -21,15 +22,16 @@ message Auth {
   repeated string roles = 2;
 }
 
-message CreateBusiness {
+// CreateBusiness
+message InviteBusiness {
   string name = 1;
   string email = 2;
   string password = 3;
 }
 
-message CreateBusinessRequest {
+message InviteBusinessRequest {
   Auth auth = 1;
-  CreateBusiness business = 2;
+  InviteBusiness business = 2;
 }
 
 message CreateBusinessResponse {
@@ -38,6 +40,37 @@ message CreateBusinessResponse {
   uint32 status = 3;
 }
 
-service BusinessService {
-  rpc CreateBusiness (CreateBusinessRequest) returns (CreateBusinessResponse) {}
+// AcceptInvitationAsBusiness
+message AcceptInvitationAsBusiness {
+  string email = 1;
+  string password = 2;
+  string tokenValue = 3;
 }
+
+message AcceptInvitationAsBusinessRequest {
+  AcceptInvitationAsBusiness acceptInvitationAsBusiness = 1;
+}
+
+message AcceptInvitationAsBusinessResponse {
+  bool isAccepted = 1;
+  Error error = 2;
+  uint32 status = 3;
+}
+
+// Get BusinessById
+message GetBusinessByIdRequest {
+  int64 id = 1;
+}
+
+message GetBusinessByIdResponse {
+  Business business = 1;
+  Error error = 2;
+  uint32 status = 3;
+}
+
+service BusinessService {
+  rpc InviteBusiness (InviteBusinessRequest) returns (CreateBusinessResponse) {}
+  rpc AcceptInvitationAsBusiness (AcceptInvitationAsBusinessRequest) returns (AcceptInvitationAsBusinessResponse) {}
+  rpc GetBusinessById (GetBusinessByIdRequest) returns (GetBusinessByIdResponse) {}
+}
+
