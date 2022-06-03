@@ -59,7 +59,7 @@ message AcceptInvitationAsBusinessResponse {
 
 // Get BusinessById
 message GetBusinessByIdRequest {
-  int64 id = 1;
+  string id = 1;
 }
 
 message GetBusinessByIdResponse {
