@@ -44,7 +44,7 @@ message CreateBusinessResponse {
 message AcceptInvitationAsBusiness {
   string email = 1;
   string password = 2;
-  string tokenValue = 3;
+  uint32 tokenValue = 3;
 }
 
 message AcceptInvitationAsBusinessRequest {
