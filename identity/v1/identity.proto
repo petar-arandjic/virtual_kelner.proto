@@ -74,7 +74,7 @@ message GetBusinessByIdResponse {
   uint32 status = 3;
 }
 
-service BusinessService {
+service IdentityService {
   rpc InviteBusiness (InviteBusinessRequest) returns (InviteBusinessResponse) {}
   rpc AcceptInvitationAsBusiness (AcceptInvitationAsBusinessRequest) returns (AcceptInvitationAsBusinessResponse) {}
   rpc GetBusinessById (GetBusinessByIdRequest) returns (GetBusinessByIdResponse) {}
