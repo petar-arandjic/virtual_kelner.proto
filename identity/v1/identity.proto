@@ -4,16 +4,14 @@ package identity.v1;
 
 option go_package = "github.com/petar-arandjic/virtual_kelner.proto/identity/v1;identitypb";
 
-message SubError {
+message Error {
   string key = 1;
   string message = 2;
 }
 
-message Error {
+message ExtendedError {
   string key = 1;
   string message = 2;
-  repeated SubError errors = 3;
-  uint32 status = 4;
 }
 
 message Business {
@@ -41,9 +39,9 @@ message InviteBusinessRequest {
   InviteBusiness business = 2;
 }
 
-message CreateBusinessResponse {
+message InviteBusinessResponse {
   Business business = 1;
-  Error error = 2;
+  ExtendedError error = 2;
   uint32 status = 3;
 }
 
@@ -60,7 +58,7 @@ message AcceptInvitationAsBusinessRequest {
 
 message AcceptInvitationAsBusinessResponse {
   bool isAccepted = 1;
-  Error error = 2;
+  ExtendedError error = 2;
   uint32 status = 3;
 }
 
@@ -71,12 +69,12 @@ message GetBusinessByIdRequest {
 
 message GetBusinessByIdResponse {
   Business business = 1;
-  Error error = 2;
+  ExtendedError error = 2;
   uint32 status = 3;
 }
 
 service BusinessService {
-  rpc InviteBusiness (InviteBusinessRequest) returns (CreateBusinessResponse) {}
+  rpc InviteBusiness (InviteBusinessRequest) returns (InviteBusinessResponse) {}
   rpc AcceptInvitationAsBusiness (AcceptInvitationAsBusinessRequest) returns (AcceptInvitationAsBusinessResponse) {}
   rpc GetBusinessById (GetBusinessByIdRequest) returns (GetBusinessByIdResponse) {}
 }

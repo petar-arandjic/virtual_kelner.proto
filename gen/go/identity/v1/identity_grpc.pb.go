@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BusinessServiceClient interface {
-	InviteBusiness(ctx context.Context, in *InviteBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error)
+	InviteBusiness(ctx context.Context, in *InviteBusinessRequest, opts ...grpc.CallOption) (*InviteBusinessResponse, error)
 	AcceptInvitationAsBusiness(ctx context.Context, in *AcceptInvitationAsBusinessRequest, opts ...grpc.CallOption) (*AcceptInvitationAsBusinessResponse, error)
 	GetBusinessById(ctx context.Context, in *GetBusinessByIdRequest, opts ...grpc.CallOption) (*GetBusinessByIdResponse, error)
 }
@@ -35,8 +35,8 @@ func NewBusinessServiceClient(cc grpc.ClientConnInterface) BusinessServiceClient
 	return &businessServiceClient{cc}
 }
 
-func (c *businessServiceClient) InviteBusiness(ctx context.Context, in *InviteBusinessRequest, opts ...grpc.CallOption) (*CreateBusinessResponse, error) {
-	out := new(CreateBusinessResponse)
+func (c *businessServiceClient) InviteBusiness(ctx context.Context, in *InviteBusinessRequest, opts ...grpc.CallOption) (*InviteBusinessResponse, error) {
+	out := new(InviteBusinessResponse)
 	err := c.cc.Invoke(ctx, "/identity.v1.BusinessService/InviteBusiness", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (c *businessServiceClient) GetBusinessById(ctx context.Context, in *GetBusi
 // All implementations must embed UnimplementedBusinessServiceServer
 // for forward compatibility
 type BusinessServiceServer interface {
-	InviteBusiness(context.Context, *InviteBusinessRequest) (*CreateBusinessResponse, error)
+	InviteBusiness(context.Context, *InviteBusinessRequest) (*InviteBusinessResponse, error)
 	AcceptInvitationAsBusiness(context.Context, *AcceptInvitationAsBusinessRequest) (*AcceptInvitationAsBusinessResponse, error)
 	GetBusinessById(context.Context, *GetBusinessByIdRequest) (*GetBusinessByIdResponse, error)
 	mustEmbedUnimplementedBusinessServiceServer()
@@ -76,7 +76,7 @@ type BusinessServiceServer interface {
 type UnimplementedBusinessServiceServer struct {
 }
 
-func (UnimplementedBusinessServiceServer) InviteBusiness(context.Context, *InviteBusinessRequest) (*CreateBusinessResponse, error) {
+func (UnimplementedBusinessServiceServer) InviteBusiness(context.Context, *InviteBusinessRequest) (*InviteBusinessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InviteBusiness not implemented")
 }
 func (UnimplementedBusinessServiceServer) AcceptInvitationAsBusiness(context.Context, *AcceptInvitationAsBusinessRequest) (*AcceptInvitationAsBusinessResponse, error) {
