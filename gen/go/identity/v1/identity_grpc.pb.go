@@ -18,158 +18,158 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// BusinessServiceClient is the client API for BusinessService service.
+// IdentityServiceClient is the client API for IdentityService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BusinessServiceClient interface {
+type IdentityServiceClient interface {
 	InviteBusiness(ctx context.Context, in *InviteBusinessRequest, opts ...grpc.CallOption) (*InviteBusinessResponse, error)
 	AcceptInvitationAsBusiness(ctx context.Context, in *AcceptInvitationAsBusinessRequest, opts ...grpc.CallOption) (*AcceptInvitationAsBusinessResponse, error)
 	GetBusinessById(ctx context.Context, in *GetBusinessByIdRequest, opts ...grpc.CallOption) (*GetBusinessByIdResponse, error)
 }
 
-type businessServiceClient struct {
+type identityServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBusinessServiceClient(cc grpc.ClientConnInterface) BusinessServiceClient {
-	return &businessServiceClient{cc}
+func NewIdentityServiceClient(cc grpc.ClientConnInterface) IdentityServiceClient {
+	return &identityServiceClient{cc}
 }
 
-func (c *businessServiceClient) InviteBusiness(ctx context.Context, in *InviteBusinessRequest, opts ...grpc.CallOption) (*InviteBusinessResponse, error) {
+func (c *identityServiceClient) InviteBusiness(ctx context.Context, in *InviteBusinessRequest, opts ...grpc.CallOption) (*InviteBusinessResponse, error) {
 	out := new(InviteBusinessResponse)
-	err := c.cc.Invoke(ctx, "/identity.v1.BusinessService/InviteBusiness", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/identity.v1.IdentityService/InviteBusiness", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *businessServiceClient) AcceptInvitationAsBusiness(ctx context.Context, in *AcceptInvitationAsBusinessRequest, opts ...grpc.CallOption) (*AcceptInvitationAsBusinessResponse, error) {
+func (c *identityServiceClient) AcceptInvitationAsBusiness(ctx context.Context, in *AcceptInvitationAsBusinessRequest, opts ...grpc.CallOption) (*AcceptInvitationAsBusinessResponse, error) {
 	out := new(AcceptInvitationAsBusinessResponse)
-	err := c.cc.Invoke(ctx, "/identity.v1.BusinessService/AcceptInvitationAsBusiness", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/identity.v1.IdentityService/AcceptInvitationAsBusiness", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *businessServiceClient) GetBusinessById(ctx context.Context, in *GetBusinessByIdRequest, opts ...grpc.CallOption) (*GetBusinessByIdResponse, error) {
+func (c *identityServiceClient) GetBusinessById(ctx context.Context, in *GetBusinessByIdRequest, opts ...grpc.CallOption) (*GetBusinessByIdResponse, error) {
 	out := new(GetBusinessByIdResponse)
-	err := c.cc.Invoke(ctx, "/identity.v1.BusinessService/GetBusinessById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/identity.v1.IdentityService/GetBusinessById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BusinessServiceServer is the server API for BusinessService service.
-// All implementations must embed UnimplementedBusinessServiceServer
+// IdentityServiceServer is the server API for IdentityService service.
+// All implementations must embed UnimplementedIdentityServiceServer
 // for forward compatibility
-type BusinessServiceServer interface {
+type IdentityServiceServer interface {
 	InviteBusiness(context.Context, *InviteBusinessRequest) (*InviteBusinessResponse, error)
 	AcceptInvitationAsBusiness(context.Context, *AcceptInvitationAsBusinessRequest) (*AcceptInvitationAsBusinessResponse, error)
 	GetBusinessById(context.Context, *GetBusinessByIdRequest) (*GetBusinessByIdResponse, error)
-	mustEmbedUnimplementedBusinessServiceServer()
+	mustEmbedUnimplementedIdentityServiceServer()
 }
 
-// UnimplementedBusinessServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedBusinessServiceServer struct {
+// UnimplementedIdentityServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedIdentityServiceServer struct {
 }
 
-func (UnimplementedBusinessServiceServer) InviteBusiness(context.Context, *InviteBusinessRequest) (*InviteBusinessResponse, error) {
+func (UnimplementedIdentityServiceServer) InviteBusiness(context.Context, *InviteBusinessRequest) (*InviteBusinessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InviteBusiness not implemented")
 }
-func (UnimplementedBusinessServiceServer) AcceptInvitationAsBusiness(context.Context, *AcceptInvitationAsBusinessRequest) (*AcceptInvitationAsBusinessResponse, error) {
+func (UnimplementedIdentityServiceServer) AcceptInvitationAsBusiness(context.Context, *AcceptInvitationAsBusinessRequest) (*AcceptInvitationAsBusinessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AcceptInvitationAsBusiness not implemented")
 }
-func (UnimplementedBusinessServiceServer) GetBusinessById(context.Context, *GetBusinessByIdRequest) (*GetBusinessByIdResponse, error) {
+func (UnimplementedIdentityServiceServer) GetBusinessById(context.Context, *GetBusinessByIdRequest) (*GetBusinessByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBusinessById not implemented")
 }
-func (UnimplementedBusinessServiceServer) mustEmbedUnimplementedBusinessServiceServer() {}
+func (UnimplementedIdentityServiceServer) mustEmbedUnimplementedIdentityServiceServer() {}
 
-// UnsafeBusinessServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BusinessServiceServer will
+// UnsafeIdentityServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to IdentityServiceServer will
 // result in compilation errors.
-type UnsafeBusinessServiceServer interface {
-	mustEmbedUnimplementedBusinessServiceServer()
+type UnsafeIdentityServiceServer interface {
+	mustEmbedUnimplementedIdentityServiceServer()
 }
 
-func RegisterBusinessServiceServer(s grpc.ServiceRegistrar, srv BusinessServiceServer) {
-	s.RegisterService(&BusinessService_ServiceDesc, srv)
+func RegisterIdentityServiceServer(s grpc.ServiceRegistrar, srv IdentityServiceServer) {
+	s.RegisterService(&IdentityService_ServiceDesc, srv)
 }
 
-func _BusinessService_InviteBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IdentityService_InviteBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InviteBusinessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BusinessServiceServer).InviteBusiness(ctx, in)
+		return srv.(IdentityServiceServer).InviteBusiness(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/identity.v1.BusinessService/InviteBusiness",
+		FullMethod: "/identity.v1.IdentityService/InviteBusiness",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BusinessServiceServer).InviteBusiness(ctx, req.(*InviteBusinessRequest))
+		return srv.(IdentityServiceServer).InviteBusiness(ctx, req.(*InviteBusinessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BusinessService_AcceptInvitationAsBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IdentityService_AcceptInvitationAsBusiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AcceptInvitationAsBusinessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BusinessServiceServer).AcceptInvitationAsBusiness(ctx, in)
+		return srv.(IdentityServiceServer).AcceptInvitationAsBusiness(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/identity.v1.BusinessService/AcceptInvitationAsBusiness",
+		FullMethod: "/identity.v1.IdentityService/AcceptInvitationAsBusiness",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BusinessServiceServer).AcceptInvitationAsBusiness(ctx, req.(*AcceptInvitationAsBusinessRequest))
+		return srv.(IdentityServiceServer).AcceptInvitationAsBusiness(ctx, req.(*AcceptInvitationAsBusinessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BusinessService_GetBusinessById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _IdentityService_GetBusinessById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBusinessByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BusinessServiceServer).GetBusinessById(ctx, in)
+		return srv.(IdentityServiceServer).GetBusinessById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/identity.v1.BusinessService/GetBusinessById",
+		FullMethod: "/identity.v1.IdentityService/GetBusinessById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BusinessServiceServer).GetBusinessById(ctx, req.(*GetBusinessByIdRequest))
+		return srv.(IdentityServiceServer).GetBusinessById(ctx, req.(*GetBusinessByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// BusinessService_ServiceDesc is the grpc.ServiceDesc for BusinessService service.
+// IdentityService_ServiceDesc is the grpc.ServiceDesc for IdentityService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var BusinessService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "identity.v1.BusinessService",
-	HandlerType: (*BusinessServiceServer)(nil),
+var IdentityService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "identity.v1.IdentityService",
+	HandlerType: (*IdentityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "InviteBusiness",
-			Handler:    _BusinessService_InviteBusiness_Handler,
+			Handler:    _IdentityService_InviteBusiness_Handler,
 		},
 		{
 			MethodName: "AcceptInvitationAsBusiness",
-			Handler:    _BusinessService_AcceptInvitationAsBusiness_Handler,
+			Handler:    _IdentityService_AcceptInvitationAsBusiness_Handler,
 		},
 		{
 			MethodName: "GetBusinessById",
-			Handler:    _BusinessService_GetBusinessById_Handler,
+			Handler:    _IdentityService_GetBusinessById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
