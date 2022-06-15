@@ -12,6 +12,7 @@ message Error {
 message ExtendedError {
   string key = 1;
   string message = 2;
+  repeated Error errors = 3;
 }
 
 message Business {
