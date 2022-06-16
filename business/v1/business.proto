@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package business.v1;
+
+option go_package = "github.com/petar-arandjic/virtual_kelner.proto/identity/v1;business";
+
+message InventoryItem {
+  string name = 1;
+  double price = 2;
+  bool canDoseBeIncreased = 3;
+  string createdAt = 4;
+  string updatedAt = 5;
+}
+
+message Auth {
+  string id = 1;
+  repeated string roles = 2;
+}
+
+message Error {
+  string key = 1;
+  string message = 2;
+}
+
+message ExtendedError {
+  string key = 1;
+  string message = 2;
+  repeated Error errors = 3;
+}
+
+message OrderUnit {
+  string id = 1;
+  string businessId = 2;
+  string qrCode = 3;
+  string name = 4;
+  string description = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+}
+
+message CreateOrderUnit {
+  string name = 1;
+  string description = 2;
+}
+
+message CreateNewOrderUnitRequest {
+  Auth auth = 1;
+  CreateOrderUnit createOrder = 2;
+}
+
+message CreateNewOrderUnitResponse {
+  OrderUnit orderUnit = 1;
+  Error error = 2;
+}
+
+message DeleteOrderUnitRequest {
+  Auth auth = 1;
+  string orderUnitId = 2;
+}
+message DeleteOrderUnitResponse {
+  bool isDeleted = 1;
+  Error error = 2;
+}
+
+message GetManyInventoryItemsRequest {
+  optional string id = 1;
+  optional string businessId = 2;
+  optional int64 page = 3;
+  optional int64 limit = 4;
+}
+message GetManyInventoryItemsResponse {
+  repeated InventoryItem items = 1;
+  Error error = 2;
+}
+
+message AddInventoryItemRequest {
+  string name = 1;
+  double price = 2;
+  bool canDoseBeIncreased = 3;
+}
+message AddInventoryItemResponse {
+  InventoryItem item = 1;
+  Error error = 2;
+}
+
+message DeleteInventoryItemRequest {
+  string itemId = 1;
+}
+message DeleteInventoryItemResponse {
+  bool isDeleted = 1;
+  Error error = 2;
+}
+
+service Business {
+  rpc CreateNewOrderUnit(CreateNewOrderUnitRequest) returns (CreateNewOrderUnitResponse) {}
+  rpc DeleteOrderUnit(DeleteOrderUnitRequest) returns (DeleteOrderUnitResponse) {}
+
+  rpc AddInventoryItem(AddInventoryItemRequest) returns(AddInventoryItemResponse) {}
+  rpc GetManyInventoryItems(GetManyInventoryItemsRequest) returns (GetManyInventoryItemsResponse) {}
+  rpc DeleteInventoryItem(DeleteInventoryItemRequest) returns (DeleteInventoryItemResponse) {}
+}
