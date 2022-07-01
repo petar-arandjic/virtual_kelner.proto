@@ -45,7 +45,7 @@ message CreateOrderUnit {
 
 message CreateNewOrderUnitRequest {
   Auth auth = 1;
-  CreateOrderUnit createOrder = 2;
+  CreateOrderUnit CreateOrderUnit = 2;
 }
 
 message CreateNewOrderUnitResponse {
