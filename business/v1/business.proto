@@ -51,7 +51,7 @@ message CreateNewOrderUnitRequest {
 
 message CreateNewOrderUnitResponse {
   OrderUnit orderUnit = 1;
-  Error error = 2;
+  ExtendedError error = 2;
 }
 
 message DeleteOrderUnitRequest {
@@ -60,7 +60,7 @@ message DeleteOrderUnitRequest {
 }
 message DeleteOrderUnitResponse {
   bool isDeleted = 1;
-  Error error = 2;
+  ExtendedError error = 2;
 }
 
 message GetManyInventoryItemsRequest {
@@ -81,7 +81,7 @@ message AddInventoryItemRequest {
 }
 message AddInventoryItemResponse {
   InventoryItem item = 1;
-  Error error = 2;
+  ExtendedError error = 2;
 }
 
 message DeleteInventoryItemRequest {
@@ -89,7 +89,7 @@ message DeleteInventoryItemRequest {
 }
 message DeleteInventoryItemResponse {
   bool isDeleted = 1;
-  Error error = 2;
+  ExtendedError error = 2;
 }
 
 service Business {
